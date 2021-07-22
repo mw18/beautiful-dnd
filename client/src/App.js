@@ -1,9 +1,9 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './App.css';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
 
-const Characters = [
+const finalCharacters = [
   {
     id: 'one',
     name: 'Character One',
@@ -32,15 +32,27 @@ const Characters = [
 ]
 
 function App() {
+  const [characters, updateCharacters] = useState(finalCharacters);
+
+  function handleOnDragEnd(result) {
+   if(!result.destination) return; 
+  
+    const items = Array.from(characters);
+    const [reorderedItem] = items.splice(result.source.index, 1);
+    items.splice(result.destination.index, 0, reorderedItem);
+
+    updateCharacters(items);
+  }
+
   return (
     <div className="App">
       <header className="App-header">
         <h1>Characters</h1>
-        <DragDropContext> 
+        <DragDropContext onDragEnd={handleOnDragEnd}> 
         <Droppable droppableId="characters">
         {(provided) => (
         <ul className="characters" {...provided.droppableProps} ref={provided.innerRef}>
-          {Characters.map(({id, name, thumb}, index) => {
+          {characters.map(({id, name, thumb}, index) => {
             return (
             <Draggable key={id} draggableId={id} index={index}>
               {(provided) => (
@@ -56,6 +68,7 @@ function App() {
             </Draggable>
             );
           })}
+          {provided.placeholder}
         </ul>
        )}
       </Droppable>  

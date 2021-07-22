@@ -3,61 +3,71 @@ import './App.css';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
 
-const finalCharacters = [
+const finalDoggos = [
   {
-    id: 'one',
-    name: 'Character One',
-    thumb: '/images/one.png'
+    id: 'boxer',
+    name: 'Boxer',
+    thumb: '/images/boxer.jpeg'
+    
   },
   {
-    id: 'two',
-    name: 'Character Two',
-    thumb: '/images/two.png'
+    id: 'chow',
+    name: 'Chow Chow',
+    thumb: '/images/chow.jpeg'
   },
   {
-    id: 'three',
-    name: 'Character Three',
-    thumb: '/images/three.png'
+    id: 'corgi',
+    name: 'Pembroke Welsh Corgi',
+    thumb: '/images/corgi.jpeg'
   },
   {
-    id: 'four',
-    name: 'Character Four',
-    thumb: '/images/four.png'
+    id: 'french-bulldog',
+    name: 'French Bulldog',
+    thumb: '/images/french-bulldog.jpeg'
   },
+
   {
-    id: 'five',
-    name: 'Character Five',
-    thumb: '/images/five.png'
+    id: 'sheepdog',
+    name: 'Old English Sheepdog',
+    thumb: '/images/sheepdog.jpeg'
+  },
+
+  {
+    id: 'shiba-inu',
+    name: 'Shiba Inu',
+    thumb: '/images/shiba-inu.jpeg'
   }
+
 ]
 
 function App() {
-  const [characters, updateCharacters] = useState(finalCharacters);
+  const [dogs, updateDogs] = useState(finalDoggos);
 
   function handleOnDragEnd(result) {
    if(!result.destination) return; 
   
-    const items = Array.from(characters);
+    const items = Array.from(dogs);
     const [reorderedItem] = items.splice(result.source.index, 1);
     items.splice(result.destination.index, 0, reorderedItem);
 
-    updateCharacters(items);
+    updateDogs(items);
   }
 
   return (
     <div className="App">
       <header className="App-header">
-        <h1>Characters</h1>
+        <h1>Doggo Ranker</h1>
+        <p>Drag and drop the doggos based on the cuteness.</p>
         <DragDropContext onDragEnd={handleOnDragEnd}> 
-        <Droppable droppableId="characters">
+        <Droppable droppableId="dogs">
         {(provided) => (
-        <ul className="characters" {...provided.droppableProps} ref={provided.innerRef}>
-          {characters.map(({id, name, thumb}, index) => {
+        <ul className="dogs" {...provided.droppableProps} ref={provided.innerRef}>
+          {dogs.map(({id, name, thumb}, index) => {
             return (
             <Draggable key={id} draggableId={id} index={index}>
               {(provided) => (
               <li ref={provided.innerRef}{...provided.draggableProps}{...provided.dragHandleProps}>
-                <div className="characters-thumb">
+                <div className="dogs-thumb">
                   <img src={thumb} alt={`${name} Thumb`} />
                 </div>
                 <p>
@@ -75,7 +85,7 @@ function App() {
       </DragDropContext>
       </header>
       <p>
-        {/* Images from <a href=""></a> */}
+      Images from <a href="https://www.goodhousekeeping.com/life/pets/advice/g1921/large-dog-breeds/">Good House Keeping</a> 
       </p>
     </div>
   );

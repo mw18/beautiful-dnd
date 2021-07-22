@@ -1,5 +1,7 @@
 import React from 'react';
 import './App.css';
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+
 
 const Characters = [
   {
@@ -34,10 +36,15 @@ function App() {
     <div className="App">
       <header className="App-header">
         <h1>Characters</h1>
-        <ul className="characters">
-          {Characters.map(({id, name, thumb}) => {
+        <DragDropContext> 
+        <Droppable droppableId="characters">
+        {(provided) => (
+        <ul className="characters" {...provided.droppableProps} ref={provided.innerRef}>
+          {Characters.map(({id, name, thumb}, index) => {
             return (
-              <li key={id}>
+            <Draggable key={id} draggableId={id} index={index}>
+              {(provided) => (
+              <li ref={provided.innerRef}{...provided.draggableProps}{...provided.dragHandleProps}>
                 <div className="characters-thumb">
                   <img src={thumb} alt={`${name} Thumb`} />
                 </div>
@@ -45,9 +52,14 @@ function App() {
                   { name }
                 </p>
               </li>
+              )}
+            </Draggable>
             );
           })}
         </ul>
+       )}
+      </Droppable>  
+      </DragDropContext>
       </header>
       <p>
         {/* Images from <a href=""></a> */}

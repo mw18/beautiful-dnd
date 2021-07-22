@@ -11,11 +11,12 @@ This is a simple React app using React Beautiful DnD, an accessible drag and dro
   * [Contributing](#contributing)
   * [Questions](#questions)
 
-![Screen Shot 2021-07-22 at 11 15 17 AM](https://user-images.githubusercontent.com/67554339/126673015-4ab8c771-9447-494a-a7c6-7f981c89dcc1.png)
+
+![React App](https://user-images.githubusercontent.com/67554339/126673864-b301cd19-962b-4c78-a455-7d72e5c1dda0.gif)
 
 
 ## Installation
-  Clone the repo to your local machine: https://github.com/mw18/beautiful-dnd and run npm i in the command line 
+  Clone the repo to your local machine: https://github.com/mw18/beautiful-dnd and run npm i => npm start in the command line 
 
 ## License
   Copyright &#169; 2020 [@MW18](https://github.com/MW18).<br>
